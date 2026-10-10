@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EBook EDU — Perpustakaan Digital Siswa</title>
+<meta name="description" content="Kumpulan library Ebook format PDF untuk menunjang Pembelajaran Digital. Gratis untuk semua siswa!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://i.imgur.com/9UKv7Rg.jpeg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+  --cream:#fff6e9; --ink:#4a2f1b; --ink-soft:#8a6a4a;
+  --amber:#f59e0b; --orange:#f97316; --teal:#14b8a6;
+  --card:#fffdf6; --shadow:0 12px 32px rgba(140,84,30,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Quicksand',sans-serif;color:var(--ink);overflow-x:hidden;
+  background:linear-gradient(180deg,#ffe4b8 0%,#fff1d6 420px,var(--cream) 900px);
+}
+::selection{background:#ffd9a3}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#f0b263;border-radius:99px;border:2px solid var(--cream)}
+::-webkit-scrollbar-track{background:transparent}
+a{text-decoration:none;color:inherit}
+
+/* NAVBAR */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;
+  display:flex;align-items:center;gap:26px;padding:10px 22px;border-radius:999px;
+  background:rgba(255,251,240,.82);backdrop-filter:blur(10px);
+  border:1px solid #ffe1b3;box-shadow:var(--shadow)}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Fredoka';font-weight:700;font-size:1.12rem;color:var(--ink)}
+.logo-ic{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#f97316,#f59e0b);display:grid;place-items:center;color:#fff;font-size:.95rem;box-shadow:0 6px 14px rgba(249,115,22,.4);animation:logoTilt 4s ease-in-out infinite}
+@keyframes logoTilt{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+.nav-links{display:flex;gap:20px}
+.nav-links a{color:var(--ink-soft);font-weight:700;font-size:.9rem;position:relative;transition:color .25s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:3px;border-radius:2px;background:var(--orange);transition:width .25s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{font-family:'Fredoka';font-weight:600;background:linear-gradient(135deg,var(--orange),var(--amber));color:#fff;border-radius:999px;padding:9px 18px;font-size:.88rem;box-shadow:0 6px 14px rgba(249,115,22,.35);transition:.25s;white-space:nowrap}
+.nav-cta:hover{transform:translateY(-2px) scale(1.05)}
+@media(max-width:760px){.nav-links{display:none}nav{gap:12px}}
+
+/* HERO */
+.hero{position:relative;min-height:720px;height:min(94vh,880px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 20px 215px;overflow:hidden;
+  background:#5f3d1e url('https://i.imgur.com/9UKv7Rg.jpeg') center/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(58,33,8,.48) 0%,rgba(58,33,8,.24) 45%,rgba(58,33,8,.42) 78%,rgba(58,33,8,.62) 100%)}
+.sun{position:absolute;top:-200px;right:-140px;width:560px;height:560px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,215,145,.55),rgba(255,190,100,.2) 45%,transparent 70%);animation:sunPulse 6s ease-in-out infinite}
+@keyframes sunPulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
+.ray{position:absolute;top:-160px;width:130px;height:85%;pointer-events:none;filter:blur(16px);transform-origin:top center;
+  background:linear-gradient(180deg,rgba(255,222,150,.4),transparent 78%);animation:sway 7s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(var(--rot))}50%{transform:rotate(calc(var(--rot) + 5deg))}}
+.ray.r1{--rot:16deg;right:40px}
+.ray.r2{--rot:8deg;right:200px;width:70px;opacity:.6;animation-duration:9s;animation-delay:-3s}
+.ray.r3{--rot:24deg;right:-70px;width:90px;opacity:.5;animation-duration:8s;animation-delay:-5s}
+.dust,.float-books{position:absolute;inset:0;pointer-events:none}
+.dust span{position:absolute;bottom:-12px;width:7px;height:7px;border-radius:50%;background:rgba(255,244,214,.9);filter:blur(1px);animation:rise linear infinite}
+@keyframes rise{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}100%{transform:translate(var(--dx),-108vh);opacity:0}}
+.fbook{position:absolute;color:var(--c);opacity:.75;filter:drop-shadow(0 4px 6px rgba(50,25,5,.35));animation:bob var(--t) ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-16px) rotate(8deg)}}
+.poster{position:absolute;z-index:1;background:#fffdf2;border:1px solid #f2e3c4;border-radius:8px;padding:16px 22px 12px;
+  box-shadow:var(--shadow);font-family:'Caveat',cursive;color:#6b4f2e;font-size:clamp(1.15rem,1.7vw,1.55rem);line-height:1.12;
+  transform-origin:top center;animation:swing 6s ease-in-out infinite}
+.poster .pin{position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ff9a5c,#e0552a);box-shadow:0 2px 4px rgba(0,0,0,.25)}
+.poster i{opacity:.65;margin-top:2px}
+.poster.p1{--pr:-5deg;left:6%;top:18%}
+.poster.p2{--pr:4deg;right:6%;top:14%;animation-delay:-3s}
+@keyframes swing{0%,100%{transform:rotate(var(--pr))}50%{transform:rotate(calc(var(--pr) + 2.2deg))}}
+@media(max-width:980px){.poster{display:none}}
+.hero-inner{position:relative;z-index:3;max-width:840px}
+.badge{display:inline-flex;align-items:center;gap:9px;background:rgba(255,251,240,.9);border:1px solid #ffdfae;
+  padding:8px 18px;border-radius:999px;font-weight:700;font-size:.86rem;color:#c2680f;box-shadow:0 6px 18px rgba(0,0,0,.25);animation:fadeDown .8s .1s both}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:none}}
+.hero-title{font-family:'Fredoka';font-weight:700;font-size:clamp(3.1rem,10vw,5.9rem);line-height:1.05;margin:16px 0 8px;color:#fffaf0;text-shadow:0 4px 18px rgba(50,25,5,.55)}
+.hero-title .word{display:inline-block;white-space:nowrap}
+.hero-title .word + .word{margin-left:.16em}
+.hero-title .ch{display:inline-block;opacity:0;transform:translateY(46px) scale(.5) rotate(8deg);animation:pop .65s cubic-bezier(.2,1.6,.4,1) forwards;animation-delay:calc(.35s + var(--i)*.07s)}
+.hero-title .ch.in{opacity:1;transform:none}
+.hero-title .ch.grad{background:linear-gradient(180deg,#ffd08a,#ff9d5c);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
+@keyframes pop{to{opacity:1;transform:none}}
+.hero-title:hover .ch.in{animation:wave 1.4s ease-in-out infinite;animation-delay:calc(var(--i)*.06s)}
+@keyframes wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.typing-wrap{min-height:3.4em;display:flex;align-items:flex-start;justify-content:center;font-size:clamp(1.02rem,2.2vw,1.28rem);font-weight:600;color:#ffe9c4;text-shadow:0 1px 10px rgba(50,25,5,.6)}
+#typed{max-width:640px}
+.cursor{display:inline-block;width:3px;height:1.15em;background:#ffd08a;vertical-align:-.2em;margin-left:2px;border-radius:2px;animation:blink 1s steps(1) infinite}
+.chips,.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.chips{margin:16px 0 24px}
+.chips.show,.hero-btns.show{opacity:1;transform:none}
+.chip{background:rgba(255,251,240,.92);border:1.5px solid #ffd9a1;color:#b45309;font-weight:700;font-size:.8rem;padding:7px 14px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.chip i{color:var(--orange);margin-right:4px}
+.btn{font-family:'Fredoka';font-weight:600;border-radius:999px;padding:14px 30px;font-size:1.02rem;cursor:pointer;transition:.3s;border:none;display:inline-flex;gap:10px;align-items:center}
+.btn-primary{position:relative;overflow:hidden;background:linear-gradient(135deg,#f97316,#f59e0b);color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.btn-primary::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-80%}100%{left:140%}}
+.btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 32px rgba(0,0,0,.35)}
+.btn-ghost{background:rgba(255,251,240,.92);color:#b45309;border:2px solid #ffd9a3}
+.btn-ghost:hover{transform:translateY(-3px);background:#fff}
+.scroll-hint{position:absolute;bottom:218px;left:50%;z-index:4;width:42px;height:42px;border-radius:50%;
+  background:rgba(255,251,240,.9);border:1px solid #ffe1b0;display:grid;place-items:center;color:var(--orange);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3);animation:hintBounce 2s infinite}
+@keyframes hintBounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+@media(max-height:760px),(max-width:640px){.scroll-hint{display:none}}
+
+/* RAK BUKU + KUCING */
+.shelf{position:absolute;left:0;right:0;bottom:0;height:200px;z-index:2;pointer-events:none}
+.plank{position:absolute;left:0;right:0;bottom:24px;height:18px;background:linear-gradient(180deg,#b07a45,#7c4a24);border-radius:10px 10px 0 0;box-shadow:inset 0 2px 0 rgba(255,255,255,.25),0 12px 28px rgba(0,0,0,.35)}
+.shelf-base{position:absolute;left:0;right:0;bottom:0;height:24px;background:linear-gradient(180deg,#7c4a24,#5f381c)}
+.bookrow{position:absolute;left:9%;right:4%;bottom:42px;display:flex;align-items:flex-end;gap:5px}
+.spine{position:relative;flex:0 0 auto;border-radius:5px 5px 3px 3px;box-shadow:inset -4px 0 8px rgba(0,0,0,.18),inset 2px 0 3px rgba(255,255,255,.25)}
+.spine::before{content:"";position:absolute;left:22%;right:22%;top:13%;height:3px;border-radius:2px;background:rgba(255,255,255,.5)}
+.spine::after{content:"";position:absolute;left:22%;right:22%;bottom:15%;height:3px;border-radius:2px;background:rgba(255,255,255,.3)}
+.plant{position:absolute;left:1.2%;bottom:42px;width:64px}
+.cat{position:absolute;right:7%;bottom:92px;width:172px;z-index:3;pointer-events:auto;cursor:pointer;transform-origin:50% 100%;animation:breathe 3.5s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.02,.975)}}
+.cat.wiggle .cat-svg{animation:wiggle .6s ease}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}65%{transform:rotate(4deg)}}
+.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%) scale(0);transform-origin:bottom center;
+  background:#fff;border:2px solid #ffd9a1;padding:10px 16px;border-radius:16px;font-weight:700;font-size:.88rem;color:#b45309;white-space:nowrap;box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.2,1.6,.4,1)}
+.bubble.show{transform:translateX(-50%) scale(1)}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-7px;width:12px;height:12px;background:#fff;border-right:2px solid #ffd9a1;border-bottom:2px solid #ffd9a1;transform:translateX(-50%) rotate(45deg)}
+.heart{position:absolute;pointer-events:none;animation:heartUp 1.5s ease-out forwards}
+@keyframes heartUp{from{opacity:1;transform:translateY(0) scale(.5)}to{opacity:0;transform:translateY(-80px) scale(1.25) rotate(12deg)}}
+.zzz{font-family:'Fredoka';fill:#a0713f;opacity:0;animation:zzz 3s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.zzz.z2{animation-delay:1s}.zzz.z3{animation-delay:2s}
+@keyframes zzz{0%{opacity:0;transform:translate(0,0)}20%{opacity:.9}100%{opacity:0;transform:translate(16px,-36px)}}
+@media(max-width:640px){
+  .hero{min-height:640px;padding-bottom:195px}
+  .cat{width:118px;right:4%;bottom:80px}.plant{width:44px}
+}
+
+/* PITA MARQUEE */
+.ribbon{position:relative;z-index:5;background:linear-gradient(90deg,#f97316,#f59e0b,#f97316);color:#fff;
+  transform:rotate(-1.2deg) scale(1.03);margin-top:-30px;box-shadow:0 10px 24px rgba(249,115,22,.3);overflow:hidden;padding:12px 0;pointer-events:none}
+.marquee{display:flex;width:max-content;animation:scroll 24s linear infinite}
+.marquee span{font-family:'Fredoka';font-weight:600;font-size:.98rem;white-space:nowrap;padding:0 20px;letter-spacing:.5px}
+.marquee i{font-size:.6em;vertical-align:middle;margin-left:18px;opacity:.8}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* SEKSI UMUM */
+section{padding:84px 20px;scroll-margin-top:90px}
+#kategori,#fitur,#motivasi,#akses{background-image:radial-gradient(rgba(190,120,50,.07) 1.5px,transparent 1.5px);background-size:26px 26px}
+.wrap{max-width:1120px;margin:0 auto}
+.center{text-align:center}
+.sec-tag{font-family:'Fredoka';font-weight:600;color:#d97706;letter-spacing:.18em;text-transform:uppercase;font-size:.8rem}
+.sec-tag i{margin-right:6px}
+.sec-title{font-family:'Fredoka';font-weight:700;font-size:clamp(1.75rem,4vw,2.5rem);margin:8px 0 4px;color:var(--ink)}
+.sec-sub{color:var(--ink-soft);font-weight:500;max-width:600px;margin:8px auto 0;line-height:1.65}
+.squiggle{width:150px;height:14px;margin:12px auto 0}
+.squiggle path{stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 1.2s ease .35s}
+.visible .squiggle path{stroke-dashoffset:0}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* STATISTIK */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.stat{background:var(--card);border:1px solid #ffe6c2;border-radius:22px;padding:28px 14px;box-shadow:var(--shadow);
+  transition:transform .45s cubic-bezier(.2,.9,.3,1.2),box-shadow .35s ease,opacity .8s ease}
+.stat:hover{transform:translateY(-7px);box-shadow:0 18px 40px rgba(190,110,30,.2)}
+.stat i{font-size:1.4rem;color:var(--orange);background:#fff1dc;width:54px;height:54px;display:grid;place-items:center;border-radius:16px;margin:0 auto 12px}
+.stat .num{font-family:'Fredoka';font-weight:700;font-size:2.05rem;color:var(--ink)}
+.stat .num em{font-style:normal;color:var(--orange)}
+.stat p{color:var(--ink-soft);font-weight:700;font-size:.86rem;margin-top:2px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* KATEGORI */
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-top:48px}
+.cat-card{position:relative;display:flex;flex-direction:column;background:var(--card);border:1px solid #ffe6c2;border-radius:20px;padding:24px 12px 18px;
+  text-align:center;color:var(--ink);box-shadow:var(--shadow);overflow:hidden;will-change:transform;
+  transition:transform .18s ease,box-shadow .3s ease,opacity .8s ease}
+.cat-card:hover{box-shadow:0 18px 38px rgba(190,110,30,.22)}
+.cat-card .ic{width:56px;height:56px;margin:0 auto 12px;border-radius:18px;display:grid;place-items:center;font-size:1.35rem;color:#fff;
+  background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 8px 16px rgba(0,0,0,.16);transition:transform .3s}
+.cat-card:hover .ic{transform:scale(1.14) rotate(-7deg)}
+.cat-card h3{font-family:'Fredoka';font-weight:600;font-size:.95rem;color:var(--ink)}
+.cat-card p{font-size:.74rem;color:var(--ink-soft);font-weight:700;margin-top:4px}
+.cat-card .shine{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(255,190,90,.2),transparent 60%)}
+.cat-card:hover .shine{opacity:1}
+.tag-pop{position:absolute;top:12px;right:-10px;background:#f43f5e;color:#fff;font-size:.6rem;font-weight:800;letter-spacing:.06em;padding:4px 12px;border-radius:99px;transform:rotate(6deg);box-shadow:0 4px 10px rgba(244,63,94,.4)}
+.tag-new{position:absolute;top:12px;right:-10px;background:#22c55e;color:#fff;font-size:.6rem;font-weight:800;letter-spacing:.06em;padding:4px 12px;border-radius:99px;transform:rotate(6deg);box-shadow:0 4px 10px rgba(34,197,94,.4)}
+
+/* KEUNGGULAN */
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px;margin-top:48px;text-align:left}
+.feat{background:var(--card);border:1px solid #ffe6c2;border-radius:22px;padding:26px 22px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:flex-start;
+  transition:transform .45s cubic-bezier(.2,.9,.3,1.2),box-shadow .35s ease,opacity .8s ease}
+.feat:hover{transform:translateY(-7px) rotate(-.6deg);box-shadow:0 18px 40px rgba(190,110,30,.2)}
+.feat .fic{flex:0 0 auto;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.25rem;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2))}
+.feat h3{font-family:'Fredoka';font-weight:600;font-size:1.05rem;color:var(--ink)}
+.feat p{color:var(--ink-soft);font-size:.87rem;font-weight:500;line-height:1.6;margin-top:4px}
+
+/* MOTIVASI */
+.quotes{background:linear-gradient(135deg,#f97316,#f59e0b 55%,#fbbf24);border-radius:34px;padding:58px 30px 44px;text-align:center;color:#fff;
+  position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(249,115,22,.35)}
+.qmark{font-size:2.4rem;color:rgba(255,255,255,.55)}
+#quoteText{font-family:'Fredoka';font-weight:600;font-size:clamp(1.25rem,3vw,1.85rem);max-width:720px;margin:16px auto 10px;min-height:2.8em;transition:opacity .45s ease,transform .45s ease}
+#quoteAuthor{font-weight:700;opacity:.85;transition:opacity .45s ease}
+.qdots{display:flex;gap:8px;justify-content:center;margin-top:22px}
+.qdot{width:10px;height:10px;border-radius:99px;background:rgba(255,255,255,.45);border:none;cursor:pointer;padding:0;transition:.3s}
+.qdot.active{width:26px;background:#fff}
+.sparkle{position:absolute;color:rgba(255,255,255,.5);animation:bob 4s ease-in-out infinite}
+.sp1{top:22px;left:6%}.sp2{bottom:30px;right:8%;animation-delay:-1.5s}.sp3{top:34px;right:20%;animation-delay:-3s;font-size:.8em}
+
+/* CTA + FOOTER */
+.cta-panel{position:relative;background:var(--card);border:2px dashed #f5b25e;border-radius:30px;padding:62px 30px;text-align:center;overflow:hidden;box-shadow:var(--shadow)}
+.cta-panel h2{font-family:'Fredoka';font-weight:700;font-size:clamp(1.7rem,4vw,2.5rem);color:var(--ink)}
+.cta-panel>p:not(.cta-note){color:var(--ink-soft);max-width:520px;margin:12px auto 26px;font-weight:500;line-height:1.65}
+.cta-note{margin-top:16px;font-size:.84rem;color:var(--ink-soft);font-weight:700}
+.cta-book{position:absolute;color:#f3c98d;opacity:.75;font-size:1.9rem;animation:bob 5s ease-in-out infinite}
+.cb1{top:26px;left:6%}.cb2{bottom:26px;right:8%;animation-delay:-2s}.cb3{top:34px;right:6%;animation-delay:-3.5s;font-size:1.6rem}
+footer{padding:34px 20px 46px;text-align:center;color:var(--ink-soft);font-weight:600;font-size:.9rem;line-height:2}
+footer strong{font-family:'Fredoka';color:var(--ink);font-size:1.05rem}
+footer .hashtags{color:#c2680f;font-weight:700}
+.beat{color:#f43f5e;display:inline-block;animation:beat 1.2s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}25%{transform:scale(1.3)}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="logo" href="#top"><span class="logo-ic"><i class="fa-solid fa-book-open"></i></span>EBook EDU</a>
+  <div class="nav-links">
+    <a href="#top">Beranda</a>
+    <a href="#kategori">Kategori</a>
+    <a href="#fitur">Keunggulan</a>
+    <a href="#motivasi">Motivasi</a>
+  </div>
+  <a class="nav-cta" href="https://sites.google.com/view/ebook-edu/mata-pelajaran">Mulai Belajar</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="sun"></div>
+  <div class="ray r1"></div><div class="ray r2"></div><div class="ray r3"></div>
+  <div class="dust" id="dust"></div>
+  <div class="float-books" id="floatBooks"></div>
+
+  <div class="poster p1"><span class="pin"></span>Baca Buku<br>Jelajahi Dunia<br><i class="fa-solid fa-book"></i></div>
+  <div class="poster p2"><span class="pin"></span>Ilmu adalah cahaya<br>yang menerangi jalan<br><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+
+  <div class="hero-inner">
+    <div class="badge"><span class="dot"></span>Perpustakaan Digital Siswa</div>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="word"><span class="ch" style="--i:0">E</span><span class="ch" style="--i:1">B</span><span class="ch" style="--i:2">o</span><span class="ch" style="--i:3">o</span><span class="ch" style="--i:4">k</span></span><span class="word"><span class="ch grad" style="--i:5">E</span><span class="ch grad" style="--i:6">D</span><span class="ch grad" style="--i:7">U</span></span>
+    </h1>
+    <div class="typing-wrap"><span id="typed"></span><span class="cursor"></span></div>
+    <div class="chips" id="chips">
+      <span class="chip"><i class="fa-solid fa-fire"></i>Selamat Belajar &amp; Membaca</span>
+      <span class="chip">#KurikulumMTsN12HST</span>
+      <span class="chip">#Literasi &amp; Numerasi</span>
+      <span class="chip">Database @DerryAbdi</span>
+    </div>
+    <div class="hero-btns" id="heroBtns">
+      <a class="btn btn-primary" href="https://sites.google.com/view/ebook-edu/mata-pelajaran"><i class="fa-solid fa-book-open-reader"></i>Mulai Membaca</a>
+      <a class="btn btn-ghost" href="https://sites.google.com/view/ebook-edu/beranda">Jelajahi Kategori <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint" title="Gulir ke bawah"><i class="fa-solid fa-chevron-down"></i></div>
+
+  <!-- Rak buku + kucing -->
+  <div class="shelf">
+    <svg class="plant" viewBox="0 0 80 110">
+      <path d="M40 70 C 40 40 20 34 12 16 C 32 22 44 42 40 70" fill="#2f9e5f"/>
+      <path d="M40 70 C 40 38 62 30 72 12 C 52 20 40 42 40 70" fill="#3fbf77"/>
+      <path d="M40 70 C 38 46 40 24 40 6 C 46 28 44 50 42 70" fill="#57cf8a"/>
+      <path d="M25 70 L55 70 L53 80 L27 80 Z" fill="#b25c39"/>
+      <path d="M27 80 L53 80 L49 106 L31 106 Z" fill="#c96f4a"/>
+    </svg>
+    <div class="bookrow" id="bookrow"></div>
+    <div class="cat" id="cat" title="Klik aku!">
+      <div class="bubble" id="bubble">Miaw! Selamat membaca <i class="fa-solid fa-heart" style="color:#f43f5e"></i></div>
+      <svg class="cat-svg" viewBox="0 0 220 120">
+        <ellipse cx="112" cy="112" rx="95" ry="6" fill="rgba(50,25,5,.25)"/>
+        <path d="M182 88 C 214 86 216 54 194 50" fill="none" stroke="#ef9f6b" stroke-width="13" stroke-linecap="round"/>
+        <path d="M38 94 C 40 62 74 46 112 48 C 154 50 184 68 186 94 Z" fill="#f4b183"/>
+        <path d="M120 52 q6 10 0 22 M138 56 q6 10 0 20 M158 62 q6 9 0 18" stroke="#de9261" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M30 46 L34 20 L54 40 Z" fill="#f4b183"/><path d="M78 46 L74 20 L54 40 Z" fill="#f4b183"/>
+        <path d="M36 40 L38 28 L48 38 Z" fill="#ee8f8f"/><path d="M72 40 L70 28 L60 38 Z" fill="#ee8f8f"/>
+        <circle cx="54" cy="64" r="29" fill="#f4b183"/>
+        <path d="M40 64 q5 5 10 0 M62 64 q5 5 10 0" stroke="#7c4a24" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="54" cy="74" r="2.6" fill="#e58f8f"/>
+        <path d="M54 77 q-3 4 -7 3 M54 77 q3 4 7 3" stroke="#7c4a24" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M30 68 L14 64 M30 73 L15 76 M80 68 L96 64 M80 73 L95 76" stroke="#d9975f" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="34" cy="72" r="4" fill="#f59e8f" opacity=".55"/><circle cx="74" cy="72" r="4" fill="#f59e8f" opacity=".55"/>
+        <ellipse cx="76" cy="92" rx="13" ry="7" fill="#f9c9a2"/>
+        <text class="zzz" x="92" y="34" font-size="15">z</text>
+        <text class="zzz z2" x="104" y="26" font-size="12">z</text>
+        <text class="zzz z3" x="114" y="18" font-size="10">z</text>
+      </svg>
+    </div>
+    <div class="plank"></div>
+    <div class="shelf-base"></div>
+  </div>
+</header>
+
+<!-- PITA BERJALAN -->
+<div class="ribbon"><div class="marquee" id="marquee"></div></div>
+
+<!-- STATISTIK -->
+<section id="statistik" style="padding-top:80px">
+  <div class="wrap center">
+    <div class="stats stagger">
+      <div class="stat reveal"><i class="fa-solid fa-book"></i><div class="num"><span class="cnt" data-target="120">0</span><em>+</em></div><p>Ebook PDF Siap Baca</p></div>
+      <div class="stat reveal"><i class="fa-solid fa-layer-group"></i><div class="num"><span class="cnt" data-target="11">0</span><em>+</em></div><p>Kategori &amp; Layanan</p></div>
+      <div class="stat reveal"><i class="fa-solid fa-gift"></i><div class="num"><span class="cnt" data-target="100">0</span><em>%</em></div><p>Gratis Untuk Siswa</p></div>
+      <div class="stat reveal"><i class="fa-solid fa-clock"></i><div class="num"><span class="cnt" data-target="24">0</span><em>/7</em></div><p>Selalu Tersedia</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- KATEGORI -->
+<section id="kategori">
+  <div class="wrap center">
+    <div class="sec-tag reveal"><i class="fa-solid fa-compass"></i>Jelajahi Koleksi</div>
+    <h2 class="sec-title reveal">Pilih Menu Belajarmu</h2>
+    <svg class="squiggle" viewBox="0 0 120 12"><path d="M2 8 Q12 2 22 8 T42 8 T62 8 T82 8 T102 8 T118 8" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/></svg>
+    <p class="sec-sub reveal">Dari buku pelajaran, fiksi, dan komik — hingga game interaktif, AI Chatbot, dan LMS. Semuanya dalam satu tempat!</p>
+
+    <div class="cats stagger">
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/mata-pelajaran" style="--c1:#3b82f6;--c2:#2563eb"><div class="ic"><i class="fa-solid fa-graduation-cap"></i></div><h3>Buku Pelajaran</h3><p>Kurikulum Lengkap</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/fiksi" style="--c1:#ec4899;--c2:#db2777"><span class="tag-pop">POPULER</span><div class="ic"><i class="fa-solid fa-feather-pointed"></i></div><h3>Buku Fiksi</h3><p>Cerita &amp; Novel</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/non-fiksi" style="--c1:#14b8a6;--c2:#0d9488"><div class="ic"><i class="fa-solid fa-book"></i></div><h3>Buku Non-Fiksi</h3><p>Ilmu &amp; Pengetahuan</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/komik" style="--c1:#f59e0b;--c2:#d97706"><div class="ic"><i class="fa-solid fa-masks-theater"></i></div><h3>Buku Komik</h3><p>Bacaan Seru</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/kumpulan-kitab" style="--c1:#ca8a04;--c2:#a16207"><div class="ic"><i class="fa-solid fa-scroll"></i></div><h3>Kumpulan Kitab</h3><p>Kitab &amp; Turats</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/sains-dan-islam" style="--c1:#22c55e;--c2:#16a34a"><div class="ic"><i class="fa-solid fa-atom"></i></div><h3>Buku Sains &amp; Islam</h3><p>Sains Islami</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/game-interaktif" style="--c1:#f43f5e;--c2:#e11d48"><span class="tag-new">SERU!</span><div class="ic"><i class="fa-solid fa-gamepad"></i></div><h3>Game Interaktif</h3><p>Belajar Sambil Main</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/ebook-edu/ai-chatbot" style="--c1:#6366f1;--c2:#4f46e5"><span class="tag-new">BARU</span><div class="ic"><i class="fa-solid fa-robot"></i></div><h3>AI Chatbot</h3><p>Asisten Belajar AI</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/lms-mtsn12hst/lms-mtsn12hst" style="--c1:#06b6d4;--c2:#0891b2"><div class="ic"><i class="fa-solid fa-chalkboard-user"></i></div><h3>LMS</h3><p>Learning Management System</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://sites.google.com/view/gurumtsn12hst/administrasi-guru-kbm" style="--c1:#f97316;--c2:#ea580c"><div class="ic"><i class="fa-solid fa-clipboard-user"></i></div><h3>Administrasi Guru</h3><p>Kelola &amp; Admin</p><span class="shine"></span></a>
+      <a class="cat-card reveal" href="https://alquran-digital-mts.blogspot.com/" style="--c1:#059669;--c2:#047857"><div class="ic"><i class="fa-solid fa-book-quran"></i></div><h3>Al-Quran Digital</h3><p>Baca &amp; Tilawah</p><span class="shine"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section id="fitur">
+  <div class="wrap">
+    <div class="center">
+      <div class="sec-tag reveal"><i class="fa-solid fa-bolt"></i>Keunggulan</div>
+      <h2 class="sec-title reveal">Kenapa EBook EDU?</h2>
+      <svg class="squiggle" viewBox="0 0 120 12"><path d="M2 8 Q12 2 22 8 T42 8 T62 8 T82 8 T102 8 T118 8" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/></svg>
+    </div>
+    <div class="feats stagger">
+      <div class="feat reveal" style="--c1:#f97316;--c2:#f59e0b"><div class="fic"><i class="fa-solid fa-gift"></i></div><div><h3>100% Gratis</h3><p>Semua konten bisa diakses bebas biaya. Integritas ilmu untuk semua siswa, tanpa terkecuali.</p></div></div>
+      <div class="feat reveal" style="--c1:#3b82f6;--c2:#14b8a6"><div class="fic"><i class="fa-solid fa-file-pdf"></i></div><div><h3>Format PDF</h3><p>Mudah dibuka di HP, tablet, maupun laptop — tanpa perlu aplikasi tambahan apa pun.</p></div></div>
+      <div class="feat reveal" style="--c1:#22c55e;--c2:#16a34a"><div class="fic"><i class="fa-solid fa-mobile-screen-button"></i></div><div><h3>Ramah HP</h3><p>Tampilan ringan dan responsif. Baca di mana saja, kapan saja, sesuai ritmemu.</p></div></div>
+      <div class="feat reveal" style="--c1:#ec4899;--c2:#f43f5e"><div class="fic"><i class="fa-solid fa-rotate"></i></div><div><h3>Update Berkala</h3><p>Koleksi buku dan fitur baru selalu ditambahkan agar belajarmu tidak ketinggalan zaman.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTIVASI -->
+<section id="motivasi">
+  <div class="wrap">
+    <div class="quotes reveal">
+      <i class="fa-solid fa-star sparkle sp1"></i>
+      <i class="fa-solid fa-star sparkle sp2"></i>
+      <i class="fa-solid fa-bookmark sparkle sp3"></i>
+      <i class="fa-solid fa-quote-left qmark"></i>
+      <p id="quoteText">“Membaca membuka pikiran, menambah wawasan, meraih masa depan.”</p>
+      <p id="quoteAuthor">— Poster Perpustakaan EBook EDU</p>
+      <div class="qdots" id="qdots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="akses">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <i class="fa-solid fa-book cta-book cb1"></i>
+      <i class="fa-solid fa-book-open cta-book cb2"></i>
+      <i class="fa-solid fa-graduation-cap cta-book cb3"></i>
+      <h2>Siap Jelajahi Dunia Ilmu?</h2>
+      <p>Ribuan halaman pengetahuan sudah menunggu. Satu klik, dan petualangan literasimu dimulai!</p>
+      <a class="btn btn-primary" href="https://sites.google.com/view/ebook-edu/beranda"><i class="fa-solid fa-book-open-reader"></i>Akses Perpustakaan Digital</a>
+      <p class="cta-note">Gratis &nbsp;•&nbsp; Tanpa Daftar &nbsp;•&nbsp; Format PDF</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>EBook EDU</strong> — Perpustakaan Ebook Digital Siswa<br>
+  <span class="hashtags">#KurikulumMTsN12HST &nbsp;•&nbsp; #Literasi &amp; Numerasi</span><br>
+  Database @DerryAbdi — Dibuat dengan <i class="fa-solid fa-heart beat"></i> untuk pendidikan Indonesia
+</footer>
+
+<script>
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>[...c.querySelectorAll(s)];
+
+/* Debu berkilau */
+const dust=$('#dust');
+for(let i=0;i<26;i++){
+  const s=document.createElement('span');
+  const sc=.5+Math.random();
+  s.style.left=Math.random()*100+'%';
+  s.style.width=s.style.height=(3+5*sc)+'px';
+  s.style.setProperty('--dx',(Math.random()*90-45)+'px');
+  s.style.animationDuration=(9+Math.random()*10)+'s';
+  s.style.animationDelay=(-Math.random()*18)+'s';
+  dust.appendChild(s);
+}
+
+/* Buku melayang + parallax */
+const fb=$('#floatBooks');
+const bColors=['#f97316','#14b8a6','#3b82f6','#ec4899','#22c55e','#eab308'];
+const bIcons=['fa-book','fa-book-open','fa-bookmark'];
+for(let i=0;i<10;i++){
+  const b=document.createElement('span');
+  b.className='fbook';
+  b.innerHTML='<i class="fa-solid '+bIcons[i%3]+'"></i>';
+  b.style.setProperty('--c',bColors[i%bColors.length]);
+  b.style.setProperty('--t',(4+Math.random()*4)+'s');
+  b.style.left=(4+Math.random()*90)+'%';
+  b.style.top=(6+Math.random()*55)+'%';
+  b.style.animationDelay=(-Math.random()*5)+'s';
+  b.dataset.depth=1+(i%3);
+  fb.appendChild(b);
+}
+const hero=$('.hero');
+hero.addEventListener('mousemove',e=>{
+  const r=hero.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+  $$('.fbook',fb).forEach(b=>{const d=+b.dataset.depth*9; b.style.translate=x*d+'px '+y*d+'px';});
+});
+
+/* Efek ketik */
+const typedEl=$('#typed');
+const msg='Kumpulan library Ebook format PDF untuk menunjang Pembelajaran Digital';
+let ti=0;
+function type(){
+  if(ti<=msg.length){
+    typedEl.textContent=msg.slice(0,ti); ti++;
+    setTimeout(type, ti===1?600:26);
+  }else{
+    $('#chips').classList.add('show');
+    $('#heroBtns').classList.add('show');
+  }
+}
+setTimeout(type,900);
+ $$('#heroTitle .ch').forEach(ch=>{
+  ch.addEventListener('animationend',()=>ch.classList.add('in'),{once:true});
+});
+
+/* Rak buku otomatis */
+const row=$('#bookrow');
+const sColors=['#e2574c','#3d84b8','#3aa76d','#e9a13b','#8e6fc1','#2fb5a3','#d96a9c','#5a6acf','#c9553d','#489e5c','#e0803a','#4a90a4'];
+let seed=7; const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
+function shade(hex){
+  const n=parseInt(hex.slice(1),16);
+  return 'rgb('+Math.round((n>>16&255)*.7)+','+Math.round((n>>8&255)*.7)+','+Math.round((n&255)*.7)+')';
+}
+for(let i=0;i<34;i++){
+  const b=document.createElement('div');
+  b.className='spine';
+  const c=sColors[i%sColors.length];
+  b.style.width=(12+rnd()*14)+'px';
+  b.style.height=(52+rnd()*46)+'px';
+  b.style.background='linear-gradient(180deg,'+c+','+shade(c)+')';
+  if(rnd()>.9){ b.style.transform='rotate(8deg)'; b.style.transformOrigin='bottom left'; b.style.marginRight='8px'; }
+  else{ b.style.transform='rotate('+(rnd()*3-1.5).toFixed(2)+'deg)'; }
+  row.appendChild(b);
+}
+
+/* Kucing */
+const cat=$('#cat'), bubble=$('#bubble');
+cat.addEventListener('click',()=>{
+  cat.classList.remove('wiggle'); void cat.offsetWidth; cat.classList.add('wiggle');
+  bubble.classList.add('show');
+  clearTimeout(cat._t); cat._t=setTimeout(()=>bubble.classList.remove('show'),2600);
+  const hCol=['#f43f5e','#fb923c','#facc15','#34d399'];
+  for(let i=0;i<4;i++){
+    const h=document.createElement('span');
+    h.className='heart';
+    h.innerHTML='<i class="fa-solid fa-heart"></i>';
+    h.style.color=hCol[i%4];
+    h.style.left=(15+Math.random()*60)+'%';
+    h.style.bottom='85%';
+    h.style.fontSize=(10+Math.random()*8)+'px';
+    cat.appendChild(h);
+    setTimeout(()=>h.remove(),1600);
+  }
+});
+
+/* Reveal saat scroll */
+ $$('.stagger').forEach(g=>$$('.reveal',g).forEach((el,i)=>el.style.transitionDelay=(i*70)+'ms'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    e.target.classList.add('visible');
+    const el=e.target;
+    setTimeout(()=>el.style.transitionDelay='',1000);
+    io.unobserve(el);
+  }
+}),{threshold:.15});
+ $$('.reveal').forEach(el=>io.observe(el));
+
+/* Counter angka */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  cio.unobserve(e.target);
+  const el=e.target, target=+el.dataset.target, dur=1600, t0=performance.now();
+  (function step(t){
+    const p=Math.min((t-t0)/dur,1), ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*ease);
+    if(p<1)requestAnimationFrame(step);
+  })(t0);
+}),{threshold:.6});
+ $$('.cnt').forEach(el=>cio.observe(el));
+
+/* Kartu 3D */
+ $$('.cat-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+    card.style.transform='perspective(600px) rotateX('+((y-.5)*-10)+'deg) rotateY('+((x-.5)*10)+'deg) translateY(-4px)';
+    card.style.setProperty('--mx',x*100+'%');
+    card.style.setProperty('--my',y*100+'%');
+  });
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+
+/* Kutipan motivasi */
+const quotes=[
+  {t:'Membaca membuka pikiran, menambah wawasan, meraih masa depan.',a:'Poster Perpustakaan EBook EDU'},
+  {t:'Ilmu adalah cahaya yang menerangi jalan.',a:'Poster Perpustakaan EBook EDU'},
+  {t:'Baca buku, jelajahi dunia.',a:'EBook EDU'},
+  {t:'Mimpi hari ini, sukses esok nanti.',a:'EBook EDU'},
+  {t:'Literasi dan numerasi adalah bekal terbaik untuk masa depan.',a:'MTsN 12 HST'}
+];
+const qt=$('#quoteText'), qa=$('#quoteAuthor'), qd=$('#qdots');
+let qi=0, qtimer;
+quotes.forEach((_,i)=>{
+  const d=document.createElement('button');
+  d.className='qdot'+(i?'':' active');
+  d.setAttribute('aria-label','Kutipan '+(i+1));
+  d.onclick=()=>{show(i);resetQ();};
+  qd.appendChild(d);
+});
+function show(i){
+  qi=i;
+  qt.style.opacity=0; qt.style.transform='translateY(10px)'; qa.style.opacity=0;
+  setTimeout(()=>{
+    qt.textContent='\u201C'+quotes[i].t+'\u201D';
+    qa.textContent='\u2014 '+quotes[i].a;
+    qt.style.opacity=1; qt.style.transform='none'; qa.style.opacity=.85;
+  },450);
+  $$('.qdot').forEach((d,j)=>d.classList.toggle('active',j===i));
+}
+function resetQ(){clearInterval(qtimer); qtimer=setInterval(()=>show((qi+1)%quotes.length),5000);}
+resetQ();
+
+/* Pita berjalan */
+const items=['Literasi & Numerasi','Ebook PDF Gratis','#KurikulumMTsN12HST','Baca Buku Jelajahi Dunia','Belajar Itu Menyenangkan','Selamat Belajar & Membaca'];
+const half=items.map(t=>'<span>'+t+'<i class="fa-solid fa-star"></i></span>').join('');
+ $('#marquee').innerHTML=half+half;
+
+/* Tombol scroll */
+ $('#scrollHint').onclick=()=>$('#kategori').scrollIntoView({behavior:'smooth'});
+</script>
+</body>
+</html>
